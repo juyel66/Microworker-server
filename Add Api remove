@@ -222,16 +222,7 @@ async function run() {
       res.send(result);
     });
 
-    // Add new task
-    // app.post('/addTask', async (req, res) => {
-    //   const task = req.body;
-    //   console.log("Received task:", task);
-    //   const user = await usersCollection.findOne({ email: task.email });
-    //   const taskCost = task.quantity * task.amount;
-
-    //   if (user.coin < taskCost) {
-    //     return res.status(400).send({ message: 'Not enough coins. Please purchase more coins.' });
-    //   }
+    
 
 
       

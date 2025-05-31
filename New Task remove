@@ -227,18 +227,6 @@ async function run() {
 
       
 
-    //   // Add the task to the database
-    //   const result = await addTaskCollection.insertOne(task);
-    //   console.log("Task insert result:", result);
-
-    //   // Deduct coins from the user
-    //   await usersCollection.updateOne(
-    //     { email: task.email },
-    //     { $inc: { coin: -taskCost } }
-    //   );
-
-    //   res.send(result);
-    // });
 
 
 

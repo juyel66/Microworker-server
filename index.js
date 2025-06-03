@@ -668,6 +668,19 @@ async function run() {
     });
     
 
+    // approve and reject related api 
+    // app.post('/submission', async(req, res) =>{
+    //   const approve = req.body;
+      // const result = await 
+    // })
+
+    // withdraw related api 
+    app.post('/withdraw', async(req,res) => {
+      const withdraw = req.body;
+      const result = await withdrawCollection.insertOne(withdraw);
+      res.send(result)
+    })
+
 
     // Add new task
     // app.post('/addTask', async (req, res) => {

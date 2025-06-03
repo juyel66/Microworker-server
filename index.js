@@ -36,6 +36,20 @@ async function run() {
     const withdrawCollection = client.db('MicroWorkers').collection('Withdraw');
 
 
+    app.patch('/tasks/:id', async (req, res) => {
+      const task = req.body;
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const updatedDoc = {
+        $set: {
+          title: task.title,
+          details: task.details,
+          SubmissionInfo: task.SubmissionInfo,
+        }
+      };
+      const result = await addTaskCollection.updateOne(filter, updatedDoc);
+      res.send(result);
+    });
 
     // Submission related API 
     app.post('/submission', async (req, res) => {

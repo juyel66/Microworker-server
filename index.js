@@ -171,6 +171,17 @@ async function run() {
       res.send(result);
     });
 
+    app.get('/users/:email', verifyToken, async (req, res) => {
+      const email = req.params.email;
+      const result = await usersCollection.findOne({ email });
+      res.send(result);
+    });
+
+    app.get('/users', verifyToken, verifyRole('admin'), async (req, res) => {
+      const result = await usersCollection.find().toArray();
+      res.send(result);
+    });
+
 
 
     // Add new task

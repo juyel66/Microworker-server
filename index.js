@@ -182,6 +182,18 @@ async function run() {
       res.send(result);
     });
 
+    app.get('/user', async (req, res) => {
+      const result = await usersCollection.find().toArray();
+      res.send(result);
+    });
+    
+
+    app.delete('/users/:id', verifyToken, verifyRole('admin'), async (req, res) => {
+      const id = req.params.id;
+      const result = await usersCollection.deleteOne({ _id: new ObjectId(id) });
+      res.send(result);
+    });
+
 
 
     // Add new task

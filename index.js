@@ -88,7 +88,7 @@ async function run() {
 
 
 
-
+    
 
     // Payment intent 
     app.post('/create-payment-intent', async (req, res) => {
@@ -105,6 +105,44 @@ async function run() {
     });
 
 
+    app.post('/payment', async (req, res) => {
+      try {
+        const {email,price,transactionId,date,status} = req.body;
+        // console.log('payment info',paymentInfo);
+        let coin = 0;
+        if(price === 1){
+          coin= 10;
+        }
+        else if(price === 9){
+          coin = 100;
+        }
+        else if(price === 19){
+          coin = 500
+        }
+        else if ( price === 39){
+          coin = 1000
+        }
+        else{
+          return res.send({message: 'invalid amount'})
+        }
+         const paymentInfo = {
+          email,transactionId,status,date, price
+         }
+        const result = await paymentCollection.insertOne(paymentInfo);
+        const query = {email: email} 
+        const updatedDoc = {
+          $inc: {
+            coin: coin
+          }
+        } 
+        const updatedCoin =await usersCollection.updateOne(query,updatedDoc)
+        res.send({result,updatedDoc})
+        // res.status(200).json({ success: true, message: "Payment saved successfully" });
+      } catch (error) {
+        console.error('Error saving payment to database:', error);
+        res.status(500).json({ success: false, message: "Failed to save payment to database" });
+      }
+    });
 
 
     // Add new task

@@ -681,6 +681,11 @@ async function run() {
       res.send(result)
     })
 
+    app.get('/withdraw', async(req, res) => {
+      const result = await withdrawCollection.find().toArray();
+      res.send(result);
+    })
+
 
     // Add new task
     // app.post('/addTask', async (req, res) => {

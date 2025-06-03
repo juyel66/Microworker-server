@@ -145,6 +145,34 @@ async function run() {
     });
 
 
+
+    app.get('/payment/:email', async (req, res) => {
+      try {
+        const email = req.params.email;
+        const result = await paymentCollection.find({ email }).toArray();
+        res.send(result);
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
+        res.status(500).send('Server error');
+      }
+    });
+
+    // User related API 
+    app.post('/users', async (req, res) => {
+      const { name, photoURL, email, role, password } = req.body;
+      const existingUser = await usersCollection.findOne({ email });
+      if (existingUser) {
+        res.send({ message: 'user already exists', insertedId: null });
+        return;
+      }
+      const coin = role === 'worker' ? 10 : 50;
+      const newUser = { name, email, photoURL, role, password, coin };
+      const result = await usersCollection.insertOne(newUser);
+      res.send(result);
+    });
+
+
+
     // Add new task
     // app.post('/addTask', async (req, res) => {
     //   const task = req.body;

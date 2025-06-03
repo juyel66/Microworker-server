@@ -551,6 +551,122 @@ async function run() {
       }
     });
 
+    app.get('/users/admin/:email', verifyToken, verifyRole('admin'), async (req, res) => {
+      const email = req.params.email;
+      if (email !== req.decoded.email) {
+        res.status(403).send({ message: 'forbidden access' });
+        return;
+      }
+      const user = await usersCollection.findOne({ email });
+      const admin = user ? user.role === 'admin' : false;
+      res.send({ admin });
+    });
+    
+
+    // approve and reject related api 
+    // app.post('/submission', async(req, res) =>{
+    //   const approve = req.body;
+      // const result = await 
+    // })
+
+    // withdraw related api 
+    app.post('/withdraw', async(req,res) => {
+      const withdraw = req.body;
+      const result = await withdrawCollection.insertOne(withdraw);
+      res.send(result)
+    })
+
+    app.get('/withdraw', async(req, res) => {
+      const result = await withdrawCollection.find().toArray();
+      res.send(result);
+    })
+
+    app.delete('/withdraw/:id', async (req, res) => {
+      const id = req.params.id;
+      const result = await withdrawCollection.deleteOne({ _id: new ObjectId(id) });
+      res.send(result);
+    });
+    app.get('/users/admin/:email', verifyToken, verifyRole('admin'), async (req, res) => {
+      const email = req.params.email;
+      if (email !== req.decoded.email) {
+        res.status(403).send({ message: 'forbidden access' });
+        return;
+      }
+      const user = await usersCollection.findOne({ email });
+      const admin = user ? user.role === 'admin' : false;
+      res.send({ admin });
+    });
+    
+
+    // approve and reject related api 
+    // app.post('/submission', async(req, res) =>{
+    //   const approve = req.body;
+      // const result = await 
+    // })
+
+    // withdraw related api 
+    app.post('/withdraw', async(req,res) => {
+      const withdraw = req.body;
+      const result = await withdrawCollection.insertOne(withdraw);
+      res.send(result)
+    })
+
+    app.get('/withdraw', async(req, res) => {
+      const result = await withdrawCollection.find().toArray();
+      res.send(result);
+    })
+
+    app.delete('/withdraw/:id', async (req, res) => {
+      const id = req.params.id;
+      const result = await withdrawCollection.deleteOne({ _id: new ObjectId(id) });
+      res.send(result);
+    });
+    app.get('/users/admin/:email', verifyToken, verifyRole('admin'), async (req, res) => {
+      const email = req.params.email;
+      if (email !== req.decoded.email) {
+        res.status(403).send({ message: 'forbidden access' });
+        return;
+      }
+      const user = await usersCollection.findOne({ email });
+      const admin = user ? user.role === 'admin' : false;
+      res.send({ admin });
+    });
+    
+
+    // approve and reject related api 
+    // app.post('/submission', async(req, res) =>{
+    //   const approve = req.body;
+      // const result = await 
+    // })
+
+    // withdraw related api 
+    app.post('/withdraw', async(req,res) => {
+      const withdraw = req.body;
+      const result = await withdrawCollection.insertOne(withdraw);
+      res.send(result)
+    })
+
+    app.get('/withdraw', async(req, res) => {
+      const result = await withdrawCollection.find().toArray();
+      res.send(result);
+    })
+
+    app.delete('/withdraw/:id', async (req, res) => {
+      const id = req.params.id;
+      const result = await withdrawCollection.deleteOne({ _id: new ObjectId(id) });
+      res.send(result);
+    });
+    app.get('/users/admin/:email', verifyToken, verifyRole('admin'), async (req, res) => {
+      const email = req.params.email;
+      if (email !== req.decoded.email) {
+        res.status(403).send({ message: 'forbidden access' });
+        return;
+      }
+      const user = await usersCollection.findOne({ email });
+      const admin = user ? user.role === 'admin' : false;
+      res.send({ admin });
+    });
+    
 
 
     // Add new task

@@ -686,6 +686,11 @@ async function run() {
       res.send(result);
     })
 
+    app.delete('/withdraw/:id', async (req, res) => {
+      const id = req.params.id;
+      const result = await withdrawCollection.deleteOne({ _id: new ObjectId(id) });
+      res.send(result);
+    });
 
     // Add new task
     // app.post('/addTask', async (req, res) => {
